@@ -29,13 +29,9 @@ const result = calculateResults(DEFAULT_INPUTS);
 
 Framework-agnostic TypeScript, zero runtime dependencies.
 
-## Work with LangOptima
+## Built by LangOptima
 
-1. **Run the live tool** → [tools.langoptima.com/calculator](https://tools.langoptima.com/calculator).
-2. **First paid step — a Growth Diagnostic** → [langoptima.com/growth-offers/diagnostic](https://www.langoptima.com/growth-offers/diagnostic): turn the estimate into an evidence-backed plan for your data.
-3. **Book a call** → [calendly.com/langoptima](https://calendly.com/langoptima).
-
-How we prepare enterprise data for AI: [langoptima.com/features/prepare-your-data-for-ai](https://www.langoptima.com/features/prepare-your-data-for-ai).
+LangOptima builds AI-ready data and knowledge-graph systems for enterprises. This is one of our open-source [free tools](https://tools.langoptima.com) — [langoptima.com](https://www.langoptima.com).
 
 ## License
 
