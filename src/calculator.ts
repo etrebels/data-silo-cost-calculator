@@ -138,8 +138,20 @@ export function calculateResults(inputs: CalculatorInputs): CalculatorResults {
   const dataSearchTimeFinal = dataSearchTime * laborScale;
   const dataScientistWaste = dataScientistWasteUncapped * laborScale;
 
+  // Round each category once, then total the rounded values, so the
+  // reported breakdown always sums exactly to the reported total
+  // (rounding the raw sum separately can drift a dollar or two off).
+  const duplicatedEffortRounded = Math.round(duplicatedEffortFinal);
+  const dataSearchTimeRounded = Math.round(dataSearchTimeFinal);
+  const missedInsightsRounded = Math.round(missedInsights);
+  const integrationOverheadRounded = Math.round(integrationOverhead);
+  const dataScientistWasteRounded = Math.round(dataScientistWaste);
   const totalAnnualWaste =
-    duplicatedEffortFinal + dataSearchTimeFinal + missedInsights + integrationOverhead + dataScientistWaste;
+    duplicatedEffortRounded +
+    dataSearchTimeRounded +
+    missedInsightsRounded +
+    integrationOverheadRounded +
+    dataScientistWasteRounded;
 
   // ── Knowledge Graph costs (illustrative solution pricing) ──
 
@@ -201,12 +213,12 @@ export function calculateResults(inputs: CalculatorInputs): CalculatorResults {
 
   return {
     currentCosts: {
-      duplicatedEffort: Math.round(duplicatedEffortFinal),
-      dataSearchTime: Math.round(dataSearchTimeFinal),
-      missedInsights: Math.round(missedInsights),
-      integrationOverhead: Math.round(integrationOverhead),
-      dataScientistWaste: Math.round(dataScientistWaste),
-      totalAnnualWaste: Math.round(totalAnnualWaste),
+      duplicatedEffort: duplicatedEffortRounded,
+      dataSearchTime: dataSearchTimeRounded,
+      missedInsights: missedInsightsRounded,
+      integrationOverhead: integrationOverheadRounded,
+      dataScientistWaste: dataScientistWasteRounded,
+      totalAnnualWaste,
     },
     knowledgeGraphCosts: {
       solutionAnnual: SOLUTION_ANNUAL_COST,
