@@ -1,10 +1,27 @@
 {
   "name": "@langoptima/data-silo-cost-calculator",
   "version": "1.0.0",
+  "description": "Open-source model for the annual cost of fragmented, disconnected data — and the ROI of unifying it.",
   "private": false,
   "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/etrebels/data-silo-cost-calculator.git"
+  },
+  "bugs": {
+    "url": "https://github.com/etrebels/data-silo-cost-calculator/issues"
+  },
+  "homepage": "https://github.com/etrebels/data-silo-cost-calculator#readme",
   "main": "./src/index.ts",
   "types": "./src/index.ts",
+  "files": [
+    "src",
+    "NOTICE",
+    "config.example.json"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
   "scripts": {
     "typecheck": "tsc --noEmit",
     "test": "vitest run"
