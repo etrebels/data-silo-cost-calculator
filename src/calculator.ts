@@ -53,7 +53,22 @@ const KG_WRANGLING_REDUCTION = 0.65;
 
 // ─── Main Calculation ───────────────────────────────────────
 
-export function calculateResults(inputs: CalculatorInputs): CalculatorResults {
+// Counts and amounts cannot be negative. This package is published for direct
+// use, and Math.max(0, NaN) is NaN, so a negative input has to be caught here
+// rather than by the floors further down.
+const nonNegative = (n: number): number => (Number.isFinite(n) && n > 0 ? n : 0);
+
+export function calculateResults(rawInputs: CalculatorInputs): CalculatorResults {
+  const inputs: CalculatorInputs = {
+    ...rawInputs,
+    companySize: nonNegative(rawInputs.companySize),
+    dataSources: nonNegative(rawInputs.dataSources),
+    departments: nonNegative(rawInputs.departments),
+    annualDataSpend: nonNegative(rawInputs.annualDataSpend),
+    dataTeamSize: nonNegative(rawInputs.dataTeamSize),
+    initialPages: nonNegative(rawInputs.initialPages),
+    ongoingPagesPerYear: nonNegative(rawInputs.ongoingPagesPerYear),
+  };
   const multiplier = INDUSTRY_MULTIPLIERS[inputs.industryVertical];
 
   // Company size factor: logarithmic scaling so larger orgs
