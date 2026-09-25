@@ -122,4 +122,25 @@ describe("calculateResults", () => {
     const maxPayroll = 200 * 150000 * 0.4; // 40% of total payroll
     expect(results.currentCosts.duplicatedEffort).toBeLessThanOrEqual(maxPayroll);
   });
+
+  it("treats negative or non-numeric counts as zero instead of returning NaN", () => {
+    // Math.max(0, NaN) is NaN, so the companySize floor alone does not catch a
+    // negative size; the package is published for direct use, not only the UI.
+    const bad: CalculatorInputs = {
+      ...DEFAULT_INPUTS,
+      companySize: -50,
+      dataSources: -3,
+      annualDataSpend: Number.NaN,
+    };
+    const walk = (value: unknown): number[] =>
+      typeof value === "number"
+        ? [value]
+        : value && typeof value === "object"
+          ? Object.values(value).flatMap(walk)
+          : [];
+    const numbers = walk(calculateResults(bad));
+
+    expect(numbers.length).toBeGreaterThan(0);
+    for (const n of numbers) expect(Number.isNaN(n)).toBe(false);
+  });
 });
